@@ -1,13 +1,15 @@
 #importing libraries
 import pandas as pd
 import numpy as np
-import datetime
+from datetime import date
 import matplotlib.pyplot as plt
 import yfinance as yf
 plt.style.use('ggplot')
 
 #getting stock data
-stockdata = yf.download('NVDA', '2021-01-28')
+day = date.today()
+yearfromday = day.replace(year=day.year-1)
+stockdata = yf.download('NVDA', yearfromday.strftime('%Y-%m-%d'))
 
 stockdata['Close'].plot(figsize=(15,7))
 plt.ylabel('Close Price')
