@@ -5,19 +5,6 @@ import Slider from '@mui/material/Slider';
 import { alpha, styled } from '@mui/material/styles';
 import { blue } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { unstable_createMuiStrictModeTheme } from '@mui/material/styles';
-
-const theme = unstable_createMuiStrictModeTheme();
-
-function App() {
-  return (
-    <React.StrictMode>
-      <ThemeProvider theme={theme}>
-        <LandingPage />
-      </ThemeProvider>
-    </React.StrictMode>
-  );
-}
 
 const SuccessSlider = styled(Slider)(({ theme }) => ({
   width: 300,
@@ -42,9 +29,3 @@ const theme = createTheme({
     },
   },
 });
-
-function App() {
-  return <ThemeProvider theme={theme}>...</ThemeProvider>;
-}
-
-ReactDOM.render(<App />, document.querySelector('#app'));
