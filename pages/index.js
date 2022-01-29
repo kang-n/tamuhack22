@@ -2,19 +2,6 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import Button from '@mui/material/Button';
 import Slider from '@mui/material/Slider';
-import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
-
-export const themeOptions: ThemeOptions = {
-  palette: {
-    type: 'dark',
-    primary: {
-      main: '#3f51b5',
-    },
-    secondary: {
-      main: '#f50057',
-    },
-  },
-};
 
 const SuccessSlider = styled(Slider)(({ theme }) => ({
   width: 300,
@@ -28,8 +15,4 @@ const SuccessSlider = styled(Slider)(({ theme }) => ({
     },
   },
 }));
-
-export default function StyledCustomization() {
-  return <SuccessSlider defaultValue={30} />;
-}
 
