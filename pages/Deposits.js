@@ -17,7 +17,10 @@ export default function Deposits() {
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         Date Here
       </Typography>
-
+      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+        Budgeting
+      </Link>
+      
     </React.Fragment>
   );
 }
