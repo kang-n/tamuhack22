@@ -14,7 +14,7 @@ yearfromday = day.replace(year=day.year-1)
 stockdata = yf.download('NVDA', yearfromday.strftime('%Y-%m-%d'))
 #change NVDA to get stock from selected in web app
 #why does it only work with nvidia
-
+#
 
 #MACD 26d EMA, 12d EMA, 9d EMA
 ema1 = stockdata.Close.ewm(span=12, adjust=False).mean()
@@ -33,8 +33,10 @@ def macdplot(price, macd, signal, histo):
     ax1 .set_title('Historical Stock Price')
     ax1.set_ylabel('Price ($)')
     ax2.set_title('MACD Oscillator')
+    '''
     ax2.plot(macd, color = 'purple', linewidth = 1, label = 'MACD')
     ax2.plot(signal, color = 'orange', linewidth = 1, label = 'Signal')
+    '''
 
     for i in range(len(price)):
         if str(histo[i])[0] == '-':
@@ -45,18 +47,6 @@ def macdplot(price, macd, signal, histo):
     plt.legend(loc = 'lower left')
 macdplot(stockdata.Close, macd, signal, histo)
 plt.show()
-
-
-
-
-
-
-'''
-stockdata[['MACD','Signal']].plot(figsize=(15,7))
-plt.ylabel('Price')
-plt.title('MACD and MACD Signal Line')
-plt.show()
-'''
 
 
 #have stock selection in web app
