@@ -1,13 +1,18 @@
 #importing libraries
 from datetime import date
+from operator import truediv
+from traceback import print_exception
 import matplotlib.pyplot as plt
 import yfinance as yf
 from math import floor
 from termcolor import colored as cl
-def getgraph(stock):
+import mpld3
+import sys
+
+for s in ['AMZN', 'GOOG','JPM','KO','MSFT','TSLA','WMT']:
+    stock = s
     plt.rcParams['figure.figsize'] = (18,10)
     plt.style.use('fivethirtyeight')
-
 
     #getting stock data
     day = date.today()
@@ -23,7 +28,7 @@ def getgraph(stock):
     macd = ema1 - ema2
     signal = macd.ewm(span = 9, adjust = False).mean()
     histo = macd - signal
-
+    plt.figure(figsize = (15,15))
     def macdplot(price, macd, signal, histo):
         #price plot
         ax1 = plt.subplot2grid((7,1), (0,0), rowspan = 4, colspan = 1)
@@ -44,15 +49,18 @@ def getgraph(stock):
                 ax2.bar(price.index[i], histo[i], color = '#de3163')
             else:
                 ax2.bar(price.index[i], histo[i], color = '#40e0d0')
-
-        plt.legend(loc = 'lower left')
     macdplot(stockdata.Close, macd, signal, histo)
-    plt.show()
+    plt.tight_layout()
+    plt.savefig('stocksignal/' + sys.argv[1] +'.png')
 
+    if(histo[-1] > 0):
+        print('Buy')
+    else:
+        print('Sell')
 
-    #have stock selection in web app
-    #get something to get google finance data of stock that is selected
-    #do stuff with moving averages
-    #plot graph and buy/sell signals
-    #display graph and signal in web app
+#have stock selection in web app
+#get something to get google finance data of stock that is selected
+#do stuff with moving averages
+#plot graph and buy/sell signals
+#display graph and signal in web app
 

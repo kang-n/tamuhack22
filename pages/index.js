@@ -4,19 +4,16 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import {useSession, signIn} from "next-auth/react";
+import {useSession, signIn, getSession} from "next-auth/react";
 import {useRouter} from 'next/router'
+
 export default function HomePage() {
   const router = useRouter()
   const { data: session } = useSession()
   console.log(session);
 
-  if(session) {
-    console.log('LoggedIn')
-  }
-
   return (
-    <Grid container sx = {{height: "100vh", width: "100vw"}}>
+    <Grid container sx = {{height: "100vh", width: "100vw", backgroundColor: '#301934'}}>
       <Grid item
         xs = {12}
         sm = {6} 
@@ -29,7 +26,7 @@ export default function HomePage() {
               mx: 4,
               display: "flex",
               flexDirection: "column",
-              alignItems: "center"
+              alignItems: "center",
             }}>
             <Typography variant = "h3" textAlign = "center">
               Welcome to Magpie!
@@ -44,10 +41,19 @@ export default function HomePage() {
               Login using your Google account to get started.
             </Typography>
             <br/>
-            <Button variant = "contained" onClick = {() => signIn('google')}>
+            <Button variant = "contained" onClick = {() => signIn('google', {
+              callbackUrl: `${window.location.origin}/dashboard`
+            })}>
               Google Login
             </Button>
           </Box>
+        </Grid>
+        <Grid item
+          style = {{
+            backgroundColor: '#301934'
+          }}
+        >
+
         </Grid>
     </Grid>
   )
