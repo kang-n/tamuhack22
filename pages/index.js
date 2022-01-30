@@ -6,13 +6,13 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import {useSession, signIn} from "next-auth/react";
 import {useRouter} from 'next/router'
-
 export default function HomePage() {
   const router = useRouter()
   const { data: session } = useSession()
+  console.log(session);
 
-  if (session) {
-    router.push('/dashboard')
+  if(session) {
+    console.log('LoggedIn')
   }
 
   return (
@@ -44,7 +44,7 @@ export default function HomePage() {
               Login using your Google account to get started.
             </Typography>
             <br/>
-            <Button variant = "contained" onClick = {() => signIn()}>
+            <Button variant = "contained" onClick = {() => signIn('google')}>
               Google Login
             </Button>
           </Box>
